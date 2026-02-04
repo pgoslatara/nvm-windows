@@ -25,7 +25,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Extract Tag from Event
       id: extract_tag
@@ -62,12 +62,12 @@ jobs:
         Write-Host "Identified Tag: $env:TAG"
 
     - name: Set up Go
-      uses: actions/setup-go@v5
+      uses: actions/setup-go@v6
       with:
         go-version: '${{ env.GO_VERSION }}'
 
     - name: Cache Go Modules
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: |
           ~/.cache/go-build
@@ -77,7 +77,7 @@ jobs:
           ${{ runner.os }}-go-
 
     - name: Cache QuikGo
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: |
           ~/go/bin
@@ -329,7 +329,7 @@ jobs:
       shell: pwsh
 
     - name: Attestation
-      uses: actions/attest-build-provenance@v2
+      uses: actions/attest-build-provenance@v3
       id: attest
       with:
         subject-path: |
@@ -370,7 +370,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 0  # Ensures that all references, including tags, are fetched
         ref: ${{ github.event.workflow_run.head_sha }}
